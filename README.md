@@ -20,8 +20,9 @@ The email posed as a **Commercial Purchase Receipt**, claiming a purchase of $62
  
 The email was signed with the name and title of a real educator (*Erika Johana López Valiente, Magister in Education, LEB Teacher - FESAD*), suggesting the sender's account was compromised and used to add credibility to the lure.
  
-> **Screenshot:** `phish-03-malicious-url.PNG`
- 
+> **Screenshot** 
+ ![](screenshots/phish-03-malicious-url.PNG)
+> 
 ### 2.2 Email Header Analysis
  
 | Field | Value |
@@ -37,8 +38,10 @@ The email was signed with the name and title of a real educator (*Erika Johana L
  
 All authentication mechanisms (SPF, DKIM, DMARC) failed or returned no action, confirming the email was spoofed. The sender appeared to use a compromised `uptc.edu.co` account routed through an unauthorized IP.
  
-> **Screenshots:** `phish-01-email-header-analysis.PNG`, `phish-01-return-path-analysis.PNG`
- 
+> **Screenshots**
+> ![](screenshots/phish-01-email-header-analysis.PNG)
+
+> ![](screenshots/phish-02-return-path-analysis.PNG)
 ---
  
 ## 3. Malicious URL Analysis
@@ -62,6 +65,9 @@ This URL was queried against the **URLhaus** malware database, which confirmed i
 - **Reported by:** abuse.ch
 - **Abuse complaint sent to:** `abuse@hudsonvalleyhost.com`
 > **Screenshots:** `phish-04-payloads.PNG`, `phish-04-urlhaus1.PNG`
+>![](screenshots/phish-04-payloads.PNG)
+
+> ![](screenshots/phish-05-urlhaus.PNG)
  
 ---
  
@@ -86,7 +92,8 @@ All three payloads were delivered from the same C2 infrastructure and share over
  
 Both keys are set under `HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`, ensuring execution on every user login.
  
-> **Screenshot:** `phish-06-coinminer-runkeys.PNG`
+> **Screenshot**
+> ![](screenshots/phish-06-coinminer-runkeys.PNG)
  
 #### Network Activity
  
@@ -97,7 +104,8 @@ Both keys are set under `HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`, en
 | GET | `http://107.175.247.199/loader/server.exe` | Second-stage executable download |
 | DNS | `gh9st.mywire.org` | Dynamic DNS — CoinMiner C2/mining pool |
  
-> **Screenshot:** `phish-07-coinminer-network.PNG`
+> **Screenshot**
+> ![](screenshots/phish-07-coinminer-network.PNG)
  
 #### Process Behavior — Sandbox Evasion
  
@@ -114,7 +122,8 @@ Start-Sleep -Seconds 50
  
 This is a **sandbox evasion technique** — the malware delays execution by 50 seconds to outlast automated sandbox timeouts before performing malicious activity.
  
-> **Screenshot:** `phish-08-coinminer-powershell.PNG`
+> **Screenshot**
+> ![](screenshots/phish-08-coinminer-powershell.PNG)
  
 #### Dropped Files
  
@@ -123,8 +132,8 @@ This is a **sandbox evasion technique** — the malware delays execution by 50 s
 | `C:\Users\user\AppData\Roaming\Fdqudm\Fsaxd.exe` | PE32 .NET executable — persistence copy |
 | `C:\Users\user\AppData\Local\Microsoft\Windows\INetCache\IE\OTUW0Q90\server[1].exe` | PE32 .NET executable — second-stage payload |
  
-> **Screenshot:** `phish-09-coinminer-droppedfiles.PNG`
- 
+> **Screenshot**
+> ![](screenshots/phish-09-coinminer-droppedfiles.PNG)
 ---
  
 ### 4.2 Payload 2 — BitRAT
@@ -141,7 +150,8 @@ This is a **sandbox evasion technique** — the malware delays execution by 50 s
  
 The use of `PUTTY` as a run key name is a **masquerading technique**, mimicking the legitimate PuTTY SSH client to avoid suspicion.
  
-> **Screenshot:** `phish-10-bitrat-runkeys.PNG`
+> **Screenshot**
+> ![](screenshots/phish-10-bitrat-runkeys.PNG)
  
 #### Network Activity
  
@@ -152,7 +162,8 @@ The use of `PUTTY` as a run key name is a **masquerading technique**, mimicking 
 | GET | `http://107.175.247.199/loader/server.exe` | Second-stage executable download |
 | DNS | `gh9st.mywire.org` | Dynamic DNS — BitRAT C2 |
  
-> **Screenshot:** `phish-11-bitrat-network.PNG`
+> **Screenshot**
+> ![](screenshots/phish-11-bitrat-network.PNG)
  
 #### Dropped Files
  
@@ -161,7 +172,8 @@ The use of `PUTTY` as a run key name is a **masquerading technique**, mimicking 
 | `C:\Users\user\AppData\Roaming\Ozndcoodb\Jzwvix.exe` | PE32 .NET executable — persistence copy |
 | `C:\Users\user\AppData\Local\Microsoft\Windows\INetCache\IE\B87Z87FM\server[1].exe` | PE32 .NET executable — second-stage payload |
  
-> **Screenshot:** `phish-12-bitrat-droppedfiles.PNG`
+> **Screenshot**
+> ![](screenshots/phish-12-bitrat-droppedfiles.PNG)
  
 ---
  
@@ -177,7 +189,8 @@ The use of `PUTTY` as a run key name is a **masquerading technique**, mimicking 
 | `Fsaxd` | `C:\Users\Admin\AppData\Roaming\Fdqudm\Fsaxd.exe` |
 | `svcsvc` | `C:\Users\Admin\AppData\Local\svcsvc\svcsvc.exe` |
  
-> **Screenshot:** `phish-13-asyncrat-runkeys.PNG`
+> **Screenshot**
+> ![](screenshots/phish-13-asyncrat-runkeys.PNG)
  
 #### Network Activity
  
@@ -196,7 +209,8 @@ The **Telegram Bot C2** (`bot5610920260`) is a notable finding. The malware uses
  
 The `xenarmor.com` license check suggests the AsyncRAT variant used here may be based on a commercial or cracked RAT builder.
  
-> **Screenshot:** `phish-14-asyncrat-network.PNG`
+> **Screenshot**
+> ![](screenshots/phish-14-asyncrat-network.PNG)
  
 #### Dropped Files
  
@@ -205,7 +219,8 @@ The `xenarmor.com` license check suggests the AsyncRAT variant used here may be 
 | `C:\Users\user\AppData\Roaming\Vlevqbxxsx\Kjcrksvp.exe` | PE32 .NET executable — persistence copy |
 | `C:\Users\user\AppData\Local\Microsoft\Windows\INetCache\IE\9QTQHWWN\server[1].exe` | PE32 .NET executable — second-stage payload |
  
-> **Screenshot:** `phish-15-asyncrat-droppedfiles.PNG`
+> **Screenshot**
+> ![](screenshots/phish-15-asyncrat-droppedfiles.PNG)
  
 ---
  
